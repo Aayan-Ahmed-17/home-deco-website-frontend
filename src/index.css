@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+@theme {
+  /* Gray Scale */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Indigo Scale */
+  --color-indigo-400: #818cf8;
+  --color-indigo-500: #6366f1;
+  --color-indigo-600: #4f46e5;
+  --color-indigo-700: #4338ca;
+  
+  /* Red Scale for accents */
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+}
+
+/* Light Mode Base Styles */
+body {
+  @apply bg-gray-50 text-gray-900 transition-colors duration-300;
+}
+
+/* Dark Mode Enhanced Styles */
+.dark body {
+  @apply bg-gray-900 text-gray-100;
+}
+
+/* Smooth transitions for all color changes */
+* {
+  @apply transition-colors duration-200;
+}
+
+/* Custom scrollbar for dark mode */
+.dark ::-webkit-scrollbar {
+  width: 10px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  @apply bg-gray-800;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded-full;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-600;
+}
+
+/* Focus outlines */
+*:focus-visible {
+  @apply outline-none ring-2 ring-indigo-500 ring-offset-2;
+}
+
+.dark *:focus-visible {
+  @apply ring-offset-gray-900;
+}
+
+/* ===== KEYFRAME ANIMATIONS ===== */
+
+/* Fade In Up - For entrance animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shimmer - For loading/emphasis effects */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Pulse - For attention-grabbing elements */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Slide In Right - For sidebar/modal transitions */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Scale In - For pop-in effects */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Bounce In - For playful entrances */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Spin - For loading indicators */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== UTILITY ANIMATION CLASSES ===== */
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+.animate-bounceIn {
+  animation: bounceIn 0.6s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Stagger delay utilities */
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.stagger-5 {
+  animation-delay: 0.5s;
+}
+
+.stagger-6 {
+  animation-delay: 0.6s;
+}
+
+/* ===== ENHANCED TRANSITIONS ===== */
+
+/* Smooth all transforms */
+.smooth-transform {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glow effect */
+.glow-effect {
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-effect:hover,
+.glow-effect:focus {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+.dark .glow-effect:hover,
+.dark .glow-effect:focus {
+  box-shadow: 0 0 20px rgba(129, 140, 248, 0.3);
+}
+
+/* Lift effect */
+.lift-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lift-effect:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.dark .lift-effect:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}

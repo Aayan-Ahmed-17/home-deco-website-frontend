@@ -376,10 +376,25 @@ a:hover { background-size: 100% 2px; }
   border-left: 1px solid rgba(15,23,36,0.04);
 }
 
-.dark .cart-sidebar { border-left-color: rgba(255,255,255,0.04); }
+.cart-sidebar { border-left-color: rgba(255,255,255,0.04); }
 
 /* Make inner scroll smooth and show panel as translucent in dark */
 .cart-sidebar .flex-grow { transition: opacity 240ms ease; }
+
+/* ===== MOBILE MENU TRANSITIONS & STYLES ===== */
+.mobile-menu-overlay {
+  background-color: rgba(0,0,0,0.6);
+  transition: opacity 280ms cubic-bezier(0.2,0.8,0.2,1), backdrop-filter 280ms;
+}
+
+.mobile-menu-sidebar {
+  /* transform and opacity are toggled by classes in JSX */
+  will-change: transform, opacity;
+  transition: transform 300ms cubic-bezier(0.2,0.8,0.2,1), opacity 300ms cubic-bezier(0.2,0.8,0.2,1);
+  border-right: 1px solid rgba(15,23,36,0.04);
+}
+
+.dark .mobile-menu-sidebar { border-right-color: rgba(255,255,255,0.04); }
 
 
 

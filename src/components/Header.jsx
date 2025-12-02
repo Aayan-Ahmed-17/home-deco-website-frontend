@@ -46,6 +46,21 @@ export const Header = ({ onCartOpen, searchQuery, onSearchChange, cartCount }) =
     }`}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
+          {/* Mobile Menu Toggle - positioned left */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:scale-110 active:scale-95 mr-4"
+            aria-label="Toggle Menu"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              {mobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-bold text-gray-800 dark:text-white tracking-tight hover:opacity-80 transition-opacity">
@@ -136,21 +151,6 @@ export const Header = ({ onCartOpen, searchQuery, onSearchChange, cartCount }) =
                 </span>
               )}
             </button>
-
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 transition-all hover:scale-110 active:scale-95"
-              aria-label="Toggle Menu"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                {mobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
           </div>
         </div>
 
@@ -173,51 +173,55 @@ export const Header = ({ onCartOpen, searchQuery, onSearchChange, cartCount }) =
         )}
       </div>
 
-      {/* Mobile Navigation Menu */}
-      {mobileMenuOpen && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
-            onClick={() => setMobileMenuOpen(false)}
-          ></div>
-          
-          {/* Menu Panel */}
-          <div className="fixed top-0 right-0 h-full w-64 bg-white dark:bg-gray-800 shadow-2xl z-50 md:hidden animate-slideInRight">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-8">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-white">Menu</h2>
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              
-              <nav className="flex flex-col space-y-4">
-                {[
-                  { to: '/', label: 'Home' },
-                  { to: '/shop', label: 'Shop' },
-                  { to: '/about', label: 'About' },
-                  { to: '/contact', label: 'Contact' }
-                ].map((link, index) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors py-2 border-b border-gray-200 dark:border-gray-700 animate-fadeInUp stagger-${index + 1}`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
+      {/* Mobile Navigation Menu (always rendered for smooth transitions) */}
+      {/* Backdrop */}
+      <div
+        className={`mobile-menu-overlay fixed inset-0 z-40 bg-black md:hidden transition-opacity ease-out ${
+          mobileMenuOpen ? 'opacity-50 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setMobileMenuOpen(false)}
+        aria-hidden={!mobileMenuOpen}
+      />
+      
+      {/* Menu Panel - slides from left */}
+      <nav className={`mobile-menu-sidebar fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-800 shadow-2xl z-50 md:hidden transition-all ease-out ${
+        mobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+      }`}
+        aria-hidden={!mobileMenuOpen}
+      >
+        <div className="p-6">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-xl font-bold text-gray-800 dark:text-white">Menu</h2>
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
+              aria-label="Close Menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
-        </>
-      )}
+          
+          <div className="flex flex-col space-y-4">
+            {[
+              { to: '/', label: 'Home' },
+              { to: '/shop', label: 'Shop' },
+              { to: '/about', label: 'About' },
+              { to: '/contact', label: 'Contact' }
+            ].map((link, index) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors py-2 border-b border-gray-200 dark:border-gray-700 animate-fadeInUp stagger-${index + 1}`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </nav>
     </header>
   );
 };

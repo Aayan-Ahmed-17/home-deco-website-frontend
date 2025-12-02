@@ -36,19 +36,21 @@ export const CartSidebar = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRe
 
   return (
     <>
-      {/* Overlay */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300"
-          onClick={handleClose}
-        ></div>
-      )}
-
-      {/* Sidebar */}
+      {/* Overlay (always rendered for smooth transitions) */}
       <div
-        className={`fixed top-0 right-0 h-full w-full sm:w-96 bg-white dark:bg-gray-800 shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+        onClick={handleClose}
+        className={`cart-overlay fixed inset-0 z-40 bg-black transition-opacity ease-out ${
+          isOpen ? 'opacity-50 pointer-events-auto backdrop-blur-sm' : 'opacity-0 pointer-events-none'
         }`}
+        aria-hidden={!isOpen}
+      />
+
+      {/* Sidebar (always rendered for smooth slide transitions) */}
+      <aside
+        className={`cart-sidebar fixed top-0 right-0 h-full w-full sm:w-96 bg-white dark:bg-gray-800 shadow-2xl z-50 transform transition-all ease-out ${
+          isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+        }`}
+        aria-hidden={!isOpen}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -130,7 +132,7 @@ export const CartSidebar = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRe
               <div>
                 <div className="space-y-4 mb-6">
                   {cartItems.map((item, index) => (
-                    <div key={item.id} className={`flex gap-4 bg-gray-50 dark:bg-gray-700 rounded-lg p-4 lift-effect animate-fadeInUp stagger-${Math.min(index % 6 + 1, 6)}`} style={{ opacity: 0 }}>
+                    <div key={item.id} className={`flex gap-4 bg-gray-50 dark:bg-gray-700 rounded-lg p-4 lift-effect animate-fadeInUp stagger-${Math.min(index % 6 + 1, 6)}`}>
                       <img
                         src={item.image}
                         alt={item.name}
@@ -207,7 +209,7 @@ export const CartSidebar = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRe
             </div>
           )}
         </div>
-      </div>
+      </aside>
     </>
   );
 };

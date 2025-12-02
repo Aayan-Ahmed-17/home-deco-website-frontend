@@ -9,6 +9,7 @@ import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { ProductDetail } from './pages/ProductDetail';
 import { useCart } from './hooks/useCart';
+import PageTransition from './components/PageTransition';
 import { useTheme } from './hooks/useTheme';
 
 function App() {
@@ -31,11 +32,11 @@ function App() {
         />
         
         <Routes>
-          <Route path="/" element={<Home searchQuery={searchQuery} onAddToCart={addToCart} />} />
-          <Route path="/shop" element={<Shop searchQuery={searchQuery} onAddToCart={addToCart} />} />
-          <Route path="/product/:id" element={<ProductDetail onAddToCart={addToCart} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/" element={<PageTransition><Home searchQuery={searchQuery} onAddToCart={addToCart} /></PageTransition>} />
+          <Route path="/shop" element={<PageTransition><Shop searchQuery={searchQuery} onAddToCart={addToCart} /></PageTransition>} />
+          <Route path="/product/:id" element={<PageTransition><ProductDetail onAddToCart={addToCart} /></PageTransition>} />
+          <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+          <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         </Routes>
 
         <Footer />

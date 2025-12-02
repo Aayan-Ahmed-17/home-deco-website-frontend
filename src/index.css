@@ -321,4 +321,46 @@ footer {
 /* Make input placeholders visible in dark */
 .dark ::placeholder { color: rgba(255,255,255,0.5) !important; }
 
+/* ===== PAGE / ROUTE TRANSITION CLASSES ===== */
+.page-transition {
+  will-change: opacity, transform;
+  min-height: 60vh;
+}
+.page-entering {
+  opacity: 0;
+  transform: translateY(8px) scale(0.995);
+  animation: pageEnter 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.page-entered {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@keyframes pageEnter {
+  0% { opacity: 0; transform: translateY(12px) scale(0.995); }
+  60% { opacity: 1; transform: translateY(-4px) scale(1.002); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Small sub-component transitions */
+.fade-in-up { animation: fadeInUp 520ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.soft-scale { animation: scaleIn 360ms cubic-bezier(0.2,0.8,0.2,1) both; }
+
+/* Images: smooth focus and hover */
+img { transition: transform 280ms ease, filter 280ms ease, opacity 280ms ease; }
+img:hover { transform: scale(1.02); }
+
+/* Buttons: micro-interactions */
+.btn { transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms; }
+.btn:active { transform: translateY(1px) scale(0.998); }
+
+/* Cards: gentle hover lift */
+.card { transition: transform 320ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 320ms; }
+.card:hover { transform: translateY(-6px); }
+
+/* Links show subtle underline animation */
+a { text-decoration: none; background-image: linear-gradient(currentColor, currentColor); background-size: 0% 2px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size 240ms ease; }
+a:hover { background-size: 100% 2px; }
+
+
 

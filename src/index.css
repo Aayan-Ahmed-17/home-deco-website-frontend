@@ -291,3 +291,34 @@ footer {
   border: 1px solid rgba(255,255,255,0.02);
 }
 
+/* ===== BROAD TAILWIND OVERRIDES FOR DARK MODE ===== */
+/* These ensure existing Tailwind utility classes adapt without editing every file. */
+.dark .bg-white { background-color: var(--surface) !important; }
+.dark .bg-gray-50 { background-color: var(--bg) !important; }
+.dark .bg-gray-100 { background-color: rgba(255,255,255,0.02) !important; }
+.dark .bg-gray-200 { background-color: rgba(255,255,255,0.03) !important; }
+.dark .bg-gray-800 { background-color: #0b1220 !important; }
+.dark .bg-gray-900 { background-color: #05060a !important; }
+
+.dark .text-gray-800, .dark .text-gray-900, .dark .text-gray-700 {
+  color: var(--text) !important;
+}
+.dark .text-gray-600, .dark .text-gray-500 {
+  color: var(--muted) !important;
+}
+
+.dark .border-gray-200 { border-color: rgba(255,255,255,0.04) !important; }
+.dark .border-gray-700 { border-color: rgba(255,255,255,0.06) !important; }
+
+.dark .hover\:bg-gray-100:hover { background-color: rgba(255,255,255,0.02) !important; }
+.dark .hover\:bg-gray-800:hover { background-color: #111827 !important; }
+
+/* Ensure containers with bg-white look like surfaces in dark mode */
+.dark .container, .dark .card, .dark .panel {
+  background: var(--surface) !important;
+}
+
+/* Make input placeholders visible in dark */
+.dark ::placeholder { color: rgba(255,255,255,0.5) !important; }
+
+

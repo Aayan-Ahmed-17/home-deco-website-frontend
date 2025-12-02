@@ -9,10 +9,13 @@ import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { ProductDetail } from './pages/ProductDetail';
 import { useCart } from './hooks/useCart';
+import { useTheme } from './hooks/useTheme';
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  // Ensure theme hook runs at top-level so the `dark` class is set early
+  const { theme } = useTheme();
   
   // Initialize cart functionality
   const { cartItems, addToCart, updateQuantity, removeFromCart, clearCart, cartTotal, cartCount } = useCart();

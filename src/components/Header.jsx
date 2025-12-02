@@ -104,6 +104,7 @@ export const Header = ({ onCartOpen, searchQuery, onSearchChange, cartCount }) =
               onClick={toggleTheme}
               className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300 transition-all focus:outline-none hover:scale-110 active:scale-95"
               aria-label="Toggle Theme"
+              aria-pressed={theme === 'dark'}
             >
               <div className={`transform transition-transform duration-500 ${theme === 'dark' ? 'rotate-180' : 'rotate-0'}`}>
                 {theme === 'dark' ? (

@@ -1,42 +1,44 @@
 @import "tailwindcss";
 
-@theme {
-  /* Gray Scale */
-  --color-gray-50: #f9fafb;
-  --color-gray-100: #f3f4f6;
-  --color-gray-200: #e5e7eb;
-  --color-gray-300: #d1d5db;
-  --color-gray-400: #9ca3af;
-  --color-gray-500: #6b7280;
-  --color-gray-600: #4b5563;
-  --color-gray-700: #374151;
-  --color-gray-800: #1f2937;
-  --color-gray-900: #111827;
-  
-  /* Indigo Scale */
-  --color-indigo-400: #818cf8;
-  --color-indigo-500: #6366f1;
-  --color-indigo-600: #4f46e5;
-  --color-indigo-700: #4338ca;
-  
-  /* Red Scale for accents */
-  --color-red-400: #f87171;
-  --color-red-500: #ef4444;
+/*
+  Design tokens: variables provide cohesive palettes for light and dark.
+  Tailwind utilities remain primary; these variables enhance components
+  that need consistent cross-theme coloring (cards, inputs, links).
+*/
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --muted: #6b7280;
+  --text: #0f1724;
+  --primary: #6366f1;
+  --primary-600: #4f46e5;
+  --accent: #667eea;
+  --glass: rgba(255, 255, 255, 0.6);
+  --card-shadow: 0 6px 20px rgba(16,24,40,0.06);
 }
 
-/* Light Mode Base Styles */
+.dark {
+  --bg: #0b1220;
+  --surface: #0f1724;
+  --muted: #9ca3af;
+  --text: #e6eef8;
+  --primary: #818cf8;
+  --primary-600: #6366f1;
+  --accent: #818cf8;
+  --glass: rgba(10, 12, 18, 0.6);
+  --card-shadow: 0 10px 30px rgba(2,6,23,0.6);
+}
+
+/* Base body styles using variables (keeps Tailwind transitions) */
 body {
-  @apply bg-gray-50 text-gray-900 transition-colors duration-300;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 250ms ease, color 250ms ease;
 }
 
-/* Dark Mode Enhanced Styles */
-.dark body {
-  @apply bg-gray-900 text-gray-100;
-}
-
-/* Smooth transitions for all color changes */
+/* Smooth transitions for color changes site-wide */
 * {
-  @apply transition-colors duration-200;
+  transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease;
 }
 
 /* Custom scrollbar for dark mode */
@@ -231,3 +233,61 @@ body {
 .dark .lift-effect:hover {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
+
+/* ===== THEMED COMPONENT STYLES ===== */
+
+/* Card surface used across product tiles, panels, etc. */
+.card {
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 0.75rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid transparent;
+}
+
+/* Primary button style that respects theme variables */
+.btn-primary {
+  background: linear-gradient(180deg, var(--primary), var(--primary-600));
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(79,70,229,0.12);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+/* Inputs and search fields — gentle surfaces and borders */
+input, textarea, select {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid rgba(15,23,36,0.06);
+  border-radius: 9999px;
+}
+
+.dark input, .dark textarea, .dark select {
+  border-color: rgba(255,255,255,0.06);
+}
+
+/* Links / primary text accents */
+a, .text-primary {
+  color: var(--primary);
+}
+
+.dark a, .dark .text-primary {
+  color: var(--accent);
+}
+
+/* Footer subtle background in dark mode */
+footer {
+  background: transparent;
+}
+
+/* Slightly dim backgrounds for panels in dark mode for readability */
+.dark .panel-muted {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.02);
+}
+

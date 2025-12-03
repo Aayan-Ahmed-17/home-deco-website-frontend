@@ -70,7 +70,7 @@ export const CartSidebar = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRe
           </div>
 
           {/* Content */}
-          <div className="flex-grow overflow-y-auto p-6">
+          <div className="grow overflow-y-auto p-6">
             {showConfirmation ? (
               /* Confirmation Message */
               <div className="text-center py-8">
@@ -138,7 +138,7 @@ export const CartSidebar = ({ isOpen, onClose, cartItems, onUpdateQuantity, onRe
                         alt={item.name}
                         className="w-20 h-20 object-cover rounded-lg"
                       />
-                      <div className="flex-grow">
+                      <div className="grow">
                         <h3 className="font-semibold text-gray-800 dark:text-white mb-1">
                           {item.name}
                         </h3>

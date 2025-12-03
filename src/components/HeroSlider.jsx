@@ -57,11 +57,11 @@ export const HeroSlider = () => {
           <img
             src={slide.image}
             alt={slide.title}
-            className={`w-full h-full object-cover transition-transform duration-[7000ms] ${
+            className={`w-full h-full object-cover transition-transform duration-7000 ${
               index === currentSlide ? 'scale-110' : 'scale-100'
             }`}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30 flex items-center">
+          <div className="absolute inset-0 bg-linear-to-r from-black/60 to-black/30 flex items-center">
             <div className="container mx-auto px-8">
               <div className={`max-w-2xl transition-all duration-1000 delay-300 ${
                 index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
